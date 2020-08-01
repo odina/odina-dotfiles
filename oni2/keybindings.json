@@ -1,0 +1,18 @@
+[
+  { "key": "<C-T>", "command": "workbench.action.quickOpen" },
+  { "key": "<C-=>", "command": "workbench.action.zoomIn" },
+  { "key": "<C-->", "command": "workbench.action.zoomOut" },
+  { "key": "<C-0>", "command": "workbench.action.zoomReset" },
+  { "key": "<C-\\>", "command": "explorer.toggle" },
+  { "key": "<C-TAB>", "command": "workbench.action.nextEditor" },
+  { "key": "<C-S-TAB>", "command": "workbench.action.previousEditor" },
+  
+  { "key": "C-`", "command": "terminal.new.current" },
+  { "key": "C-W", "command": "workbench.action.closeWindow", "when": "!editorIsOpen" },
+  { "key": "C-L", "command": "workbench.action.increaseViewSize" },
+  { "key": "C-H", "command": "workbench.action.decreaseViewSize" },
+
+  // removed default keybindings
+  { "key": "<C-P>", "command": "n/a" },
+  { "key": "<D-P>", "command": "n/a" } // D is mod5 too
+]
