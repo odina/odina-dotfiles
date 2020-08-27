@@ -80,7 +80,8 @@ awful.layout.layouts = {
 -- Themes define colours, icons, font and wallpapers.
 -- beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
 beautiful.init("~/.config/awesome/theme.lua")
-beautiful.font = "Noto Sans Mono 6"
+-- beautiful.font = "Noto Sans Mono 6"
+beautiful.font = "Meslo LG S DZ Regular 8"
 
 -- {{{ Menu
 -- Create a launcher widget and a main menu
@@ -187,17 +188,17 @@ awful.screen.connect_for_each_screen(function(s)
 
     -- Each screen has its own tag table.
     awful.tag(
-      { 
-        "dev", 
-        "web", 
-        "dev", 
-        ".", 
-        ".", 
-        ".", 
-        ".", 
-        ".", 
-        "soc" 
-      }, 
+      {
+        "dev",
+        "ed",
+        "web",
+        ".",
+        ".",
+        ".",
+        ".",
+        ".",
+        "soc"
+      },
     s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
@@ -242,7 +243,7 @@ awful.screen.connect_for_each_screen(function(s)
 	    wibox.widget {
 	      systray,
               mytextclock,
-              spacing = 30,
+              spacing = 35,
               layout = wibox.layout.fixed.horizontal,
 	    },
 	    wibox.widget {
@@ -359,16 +360,16 @@ globalkeys = gears.table.join(
     awful.key({ modkey },            "r",     function () awful.screen.focused().mypromptbox:run() end,
               {description = "run prompt", group = "launcher"}),
 
-    awful.key({ modkey }, "x",
-              function ()
-                  awful.prompt.run {
-                    prompt       = "Run Lua code: ",
-                    textbox      = awful.screen.focused().mypromptbox.widget,
-                    exe_callback = awful.util.eval,
-                    history_path = awful.util.get_cache_dir() .. "/history_eval"
-                  }
-              end,
-              {description = "lua execute prompt", group = "awesome"}),
+    -- awful.key({ modkey }, "x",
+    --           function ()
+    --               awful.prompt.run {
+    --                 prompt       = "Run Lua code: ",
+    --                 textbox      = awful.screen.focused().mypromptbox.widget,
+    --                 exe_callback = awful.util.eval,
+    --                 history_path = awful.util.get_cache_dir() .. "/history_eval"
+    --               }
+    --           end,
+    --           {description = "lua execute prompt", group = "awesome"}),
     -- Menubar
     awful.key({ modkey }, "p", function() menubar.show() end,
               {description = "show the menubar", group = "launcher"}),
@@ -394,6 +395,8 @@ clientkeys = gears.table.join(
         {description = "toggle fullscreen", group = "client"}),
     awful.key({ modkey, "Shift"   }, "c",      function (c) c:kill()                         end,
               {description = "close", group = "client"}),
+    awful.key({ modkey            }, "x",      function (c) c:kill()                         end,
+              {description = "close", group = "client"}),
     awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ,
               {description = "toggle floating", group = "client"}),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
@@ -401,32 +404,32 @@ clientkeys = gears.table.join(
     awful.key({ modkey,           }, "o",      function (c) c:move_to_screen()               end,
               {description = "move to screen", group = "client"}),
     awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end,
-              {description = "toggle keep on top", group = "client"}),
-    awful.key({ modkey,           }, "n",
-        function (c)
-            -- The client currently has the input focus, so it cannot be
-            -- minimized, since minimized clients can't have the focus.
-            c.minimized = true
-        end ,
-        {description = "minimize", group = "client"}),
-    awful.key({ modkey,           }, "m",
-        function (c)
-            c.maximized = not c.maximized
-            c:raise()
-        end ,
-        {description = "(un)maximize", group = "client"}),
-    awful.key({ modkey, "Control" }, "m",
-        function (c)
-            c.maximized_vertical = not c.maximized_vertical
-            c:raise()
-        end ,
-        {description = "(un)maximize vertically", group = "client"}),
-    awful.key({ modkey, "Shift"   }, "m",
-        function (c)
-            c.maximized_horizontal = not c.maximized_horizontal
-            c:raise()
-        end ,
-        {description = "(un)maximize horizontally", group = "client"})
+              {description = "toggle keep on top", group = "client"})
+    -- awful.key({ modkey,           }, "n",
+    --     function (c)
+    --         -- The client currently has the input focus, so it cannot be
+    --         -- minimized, since minimized clients can't have the focus.
+    --         c.minimized = true
+    --     end ,
+    --     {description = "minimize", group = "client"}),
+    -- awful.key({ modkey,           }, "m",
+    --     function (c)
+    --         c.maximized = not c.maximized
+    --         c:raise()
+    --     end ,
+    --     {description = "(un)maximize", group = "client"}),
+    -- awful.key({ modkey, "Control" }, "m",
+    --     function (c)
+    --         c.maximized_vertical = not c.maximized_vertical
+    --         c:raise()
+    --     end ,
+    --     {description = "(un)maximize vertically", group = "client"}),
+    -- awful.key({ modkey, "Shift"   }, "m",
+    --     function (c)
+    --         c.maximized_horizontal = not c.maximized_horizontal
+    --         c:raise()
+    --     end ,
+    --     {description = "(un)maximize horizontally", group = "client"})
 )
 
 -- Bind all key numbers to tags.
@@ -568,6 +571,14 @@ awful.rules.rules = {
     --   properties = { screen = 1, tag = "2" } },
 }
 -- }}}
+
+
+-- (odina) rounded corners
+-- client.connect_signal("manage", function (c)
+--   c.shape = function(cr,w,h)
+--     gears.shape.rounded_rect(cr,w,h,10)
+--   end
+-- end)
 
 -- {{{ Signals
 -- Signal function to execute when a new client appears.
